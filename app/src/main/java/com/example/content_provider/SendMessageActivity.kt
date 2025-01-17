@@ -79,6 +79,7 @@ class SendMessageActivity : AppCompatActivity() {
                 true
             }
             R.id.action_exit -> {
+
                 finishAffinity()
                 true
             }
@@ -112,15 +113,13 @@ class SendMessageActivity : AppCompatActivity() {
                 SmsManager.getDefault()
             }
 
+            smsManager.sendTextMessage(phoneNumber, null, message, null, null)
 
-            val parts = smsManager.divideMessage(message)
-            smsManager.sendMultipartTextMessage(phoneNumber, null, parts, null, null)
-
-            Toast.makeText(this, "Сообщение отправлено", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Сообщение отправлено", Toast.LENGTH_LONG).show()
             finish()
         } catch (e: Exception) {
             Toast.makeText(
-                this, 
+                applicationContext, 
                 "Ошибка отправки: ${e.message}", 
                 Toast.LENGTH_LONG
             ).show()
